@@ -6,7 +6,19 @@
 		<title>The Bay Area CAN &dash; Submission Form</title>
 	</head>
 	<body style="background-color: #f2f2f2">
-	<form style="text-align: center">
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <script>
+        function runScript(){
+            $.ajax({
+              url: "send_data.py",
+             context: document.body
+            }).done(function() {
+             alert('The text has been sent');;
+            });
+        }
+    </script>
+	<form name="text-form" action="send_data.py" method="get" style="text-align: center" >
 		<br><br><br>
 		<h1>The Bay Area CAN Text Messaging Portal</h1>
 		<label for="text-message">Text message:</label><br>
@@ -22,8 +34,9 @@
 		  <option value="4">County 4: Marin + Sonoma</option>
 		  <option value="5">County 5: Solona + Napa</option>
 		</select>
-		<br><br><br><br>
-		<input style="font-size:30px; width: 30%; border-radius: 30px; color: white; background-color:black" type="submit" value="Send Text">
+		<br><br>
+		<button style="font-size:30px; width: 30%; border-radius: 30px; color: white; background-color:black" type="submit">Send Text</button>
+		<br><br><br>
 		<p>Double check EVERYTHING before you hit the "Send Text" button. </p>
 			<li>Ensure the text message is not empty.</li>
 			<li>Double-check the text message does not have any typos.</li>
