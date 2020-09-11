@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="style.css">
+		<title>The Bay Area CAN &dash; Submission Form</title>
+	</head>
+	<body style="background-color: #f2f2f2">
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use -->
+	<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-storage.js"></script>
+
+	<form name="text-form" action="/my-link/" method="POST" style="text-align: center" >
+		<br><br><br>
+		<h1>The Bay Area CAN Text Messaging Portal</h1>
+		<label for="text-message">Text message:</label><br>
+		<textarea rows="10" cols="50" type="text" id="text-message" name="text-message" value="Start typing here..."></textarea><br><br>
+		<label for="myfile">Select a file:</label>
+		<div class="mainDiv" align="right">
+			<h1 align="left">File Upload</h1>
+			<progress id="uploader" value="0" max="100">0%</progress>
+			<input type="file" id="myfile" name="myfile"><br><br>
+		</div>
+		<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+		<script>
+			// Your web app's Firebase configuration
+			var firebaseConfig = {
+				apiKey: "AIzaSyDQBcsCLRd-yOPcMTAkGdp1zm3blzyT-g8",
+			  authDomain: "bayareacan-35619.firebaseapp.com",
+			  databaseURL: "https://bayareacan-35619.firebaseio.com/",
+			  storageBucket: "bayareacan-35619.appspot.com"
+			};
+			// Initialize Firebase
+			firebase.initializeApp(firebaseConfig);
+
+			var uploader = document.getElementById('uploader');
+			var fileButton = document.getElementById('myfile');
+			fileButton.addEventListener('change', function(e) {
+				var file = e.target.files[0];
+				var storageRef = firebase.storage().ref('img/' + file.name);
+  			var task = storageRef.put(file);
+  			task.on('state_changed', function progress(snapshot) {
+    			var percentage = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+    			uploader.value = percentage;
+				}, function error(err) {
+
+  			},function complete() {
+
+  			});
+			});
+		</script>
+		<label for="region">Select a region:</label><br>
+		<select name="region" id="region">
+		  <option value="0">Empty</option>
+		  <option value="1">County 1: Alameda + Contra Costa</option>
+		  <option value="2">County 2: Santa Clara</option>
+		  <option value="3">County 3: San Mateo + San Francisco</option>
+		  <option value="4">County 4: Marin + Sonoma</option>
+		  <option value="5">County 5: Solona + Napa</option>
+		</select>
+		<br><br>
+		<button style="font-size:30px; width: 30%; border-radius: 30px; color: white; background-color:black" type="submit">Send Text</button>
+		<br><br><br>
+		<p>Double check EVERYTHING before you hit the "Send Text" button. </p>
+			<li>Ensure the text message is not empty.</li>
+			<li>Double-check the text message does not have any typos.</li>
+			<li>Check if you have attached the correct pdf.</li>
+			<li>Please ensure you have selected a region.</li>
+		<p>!! HITTING SEND IS IRREVERSIBLE !!</p>
+		</form>
+	</body>
+</html>
