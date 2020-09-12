@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="style.css">
+		<link rel="icon" type="image/png" href="./images/baCAN-favicon.png">
 		<title>The Bay Area CAN &dash; Submission Form</title>
 	</head>
 	<body style="background-color: #f2f2f2">
@@ -18,12 +19,11 @@
 		<h1>The Bay Area CAN Text Messaging Portal</h1>
 		<label for="text-message">Text message:</label><br>
 		<textarea rows="10" cols="50" type="text" id="text-message" name="text-message" value="Start typing here..."></textarea><br><br>
-		<label for="myfile">Select a file:</label>
-		<div class="mainDiv" align="right">
-			<h1 align="left">File Upload</h1>
+		<label for="myfile">Select a file:</label><br>
+		<div class="mainDiv" align="center">
 			<progress id="uploader" value="0" max="100">0%</progress>
-			<input type="file" id="myfile" name="myfile"><br><br>
-		</div>
+			<input type="file" id="myfile" name="myfile"> 
+		</div><br>
 		<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
 		<script>
 			// Your web app's Firebase configuration
