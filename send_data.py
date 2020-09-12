@@ -27,7 +27,6 @@ config = {
 }
 firebase = pyrebase.initialize_app(config)
 
-
 def print_dict():
     db = firebase.database()
 

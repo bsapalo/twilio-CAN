@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask import request
 import pyrebase
+import urllib, os
 
 from twilio.rest import Client
 
@@ -8,7 +9,7 @@ import send_data
 app = Flask(__name__)
 
 account_sid = "ACef20baf110bb81da947fa1f862f59e19"
-auth_token = "3cf6b9bdde2574221847b5027d59d483"
+auth_token = ""
 client = Client(account_sid, auth_token)
 
 
@@ -26,9 +27,8 @@ def get_image_url(filename):
         image_url = storage.child(file.name).get_url(None)
     return image_url
 
-  #   const images = firebase.storage().ref().child('companyImages');
-  # const image = images.child('image1');
-  # image.getDownloadURL().then((url) => { this.setState({ img: url }));
+numbers_dict = send_data.print_dict()
+print(numbers_dict)
 
 @app.route('/my-link/', methods=["POST"])
 def my_link():
@@ -37,13 +37,14 @@ def my_link():
         text_message = request.form["text-message"]
         my_file = request.form["myfile"]
         image_url = get_image_url(my_file)
-    numbers_dict = send_data.print_dict()
     for group in send_data.county_dict:
         if (region == group):
             print(group)
+            temp_nums = []
             for county in send_data.county_dict[group]:
                 print(county)
                 for phone_num in numbers_dict[county]:
+                    temp_nums.append(phone_num)
                     message = client.messages.create(from_='+19084482862', body= str(text_message), media_url=[image_url], to= str(phone_num))
 
             return "Your text has been sent!"
