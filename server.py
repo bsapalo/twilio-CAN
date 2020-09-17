@@ -8,8 +8,8 @@ from twilio.rest import Client
 import send_data
 app = Flask(__name__)
 
-account_sid = "ACef20baf110bb81da947fa1f862f59e19"
-auth_token = ""
+account_sid = os.environ['TWILIO_ACCOUNT_SID']
+auth_token = os.environ['TWILIO_AUTH_TOKEN']
 client = Client(account_sid, auth_token)
 
 
