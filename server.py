@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flask import request
 import pyrebase
 import urllib, os
+from werkzeug.exceptions import HTTPException
 
 from twilio.rest import Client
 
@@ -29,6 +30,20 @@ def get_image_url(filename):
 
 numbers_dict = send_data.print_dict()
 print(numbers_dict)
+
+@app.errorhandler(HTTPException)
+def handle_exception(e):
+    """Return JSON instead of HTML for HTTP errors."""
+    # start with the correct headers and status code from the error
+    response = e.get_response()
+    # replace the body with JSON
+    response.data = json.dumps({
+        "code": e.code,
+        "name": e.name,
+        "description": e.description,
+    })
+    response.content_type = "application/json"
+    return response
 
 @app.route('/twilio-CAN/templates/91bee536-0b60-41b4-9199-583abb1480cf.html/my-link/', methods=["GET","POST"])
 def my_link():
