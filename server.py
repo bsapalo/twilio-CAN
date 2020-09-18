@@ -30,7 +30,7 @@ def get_image_url(filename):
 numbers_dict = send_data.print_dict()
 print(numbers_dict)
 
-@app.route('/my-link/', methods=["POST"])
+@app.route('/templates/91bee536-0b60-41b4-9199-583abb1480cf.html/my-link/', methods=["POST"])
 def my_link():
     if request.method == "POST":
         region = request.form["region"]
